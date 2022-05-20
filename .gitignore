@@ -1,0 +1,19 @@
+.vscode
+.idea
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+
+*db.sqlite3*
+
+/venv
+
+*.sqlite3
+*.sql
+*.db*
+*.cpython-38.pyc
+*.cpython-39.pyc
+*.pyc
+
