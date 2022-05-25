@@ -5,4 +5,4 @@ class ShipmentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Shipment
-        fields = ('__all__')
+        fields = ('shipment_id', 'order_id', 'ship_date', 'origin', 'destination', 'customer', 'type', 'carrier', 'status')
