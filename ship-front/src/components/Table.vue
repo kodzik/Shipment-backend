@@ -50,7 +50,7 @@
     methods: {
         async getShipments() {
             try {
-                const response = await axios.get(`http://localhost:8000/api/shipments/`);
+                const response = await axios.get(`api/shipments/`);
                 this.shipments = await response.data;
             } catch (error) {
                 console.log(error);
