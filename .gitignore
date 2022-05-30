@@ -17,3 +17,22 @@ __pycache__/
 *.cpython-39.pyc
 *.pyc
 
+
+# Logs
+ship-front/logs
+ship-front/*.log
+ship-front/npm-debug.log*
+ship-front/yarn-debug.log*
+ship-front/yarn-error.log*
+ship-front/pnpm-debug.log*
+ship-front/lerna-debug.log*
+
+ship-front/node_modules
+ship-front/.DS_Store
+ship-front/dist
+ship-front/dist-ssr
+ship-front/coverage
+ship-front/*.local
+
+ship-front//cypress/videos/
+ship-front//cypress/screenshots/

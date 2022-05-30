@@ -1,6 +1,6 @@
 <script lang="ts">
     import ModifyShip from "../components/ModifyShip.vue";
-    import axios from 'axios';
+    import { http } from "../main.js";
     
     export default {
         data(){
@@ -23,7 +23,7 @@
         methods: {
             async getShipment(id: string) {
                 try {             
-                    const response = await axios.get(`http://localhost:8000/api/shipments/${id}`);
+                    const response = await http.get(`shipments/${id}`);
                     this.shipment = await response.data[0];
                 } catch (error) {
                     console.log(error);
@@ -31,7 +31,7 @@
             },
             async updateShipment(id: string, shipment: any){
                 try {
-                    await axios.put(`http://localhost:8000/api/shipments/${id}`, shipment);
+                    await http.put(`shipments/${id}`, shipment);
                 } catch (error) {
                     console.log(error);
                 } finally {
