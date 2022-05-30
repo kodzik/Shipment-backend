@@ -1,7 +1,7 @@
 <script lang="ts">
     import ModifyShip from "../components/ModifyShip.vue";
-    import axios from 'axios';
-    // import { API_URL } from "../main/";
+    import { http } from "../main.js";
+
     export default {
         data(){
             return{
@@ -23,7 +23,7 @@
         methods: {
             async createShipment(shipment: any){
                 try {
-                    await axios.post(`api/shipments/`, shipment);
+                    await http.post(`shipments/`, shipment);
                 } catch (error) {
                     console.log(error);
                 } finally {

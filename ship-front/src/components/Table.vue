@@ -1,3 +1,43 @@
+<script>
+    import { http } from "../main.js";
+
+    export default {
+        data() {
+        return {
+            columns: ['Shipment ID', 'Order ID', 'Ship date', 'Origin', 'Destination', 'Customer', 'Type ', 'Carrier', 'Status'],
+            shipments: [],
+        };
+        },
+        watch: {},
+        methods: {
+            async getShipments() {
+                try {
+                    const response = await http.get(`shipments/`);
+                    this.shipments = await response.data;
+                } catch (error) {
+                    console.log(error);
+                }
+            },
+            async erase(id){
+                console.log("Delete",id);
+                try {
+                    const response = await http.delete(`shipments/${id}`);
+                    this.getShipments()
+                } catch (error) {
+                    console.log(error);
+                }
+            },
+            formatDate(date) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' }
+            return new Date(date).toLocaleDateString('en', options)
+        },
+        },
+        created() {
+            this.getShipments();
+        },
+    };
+</script>
+
 <template>
   <div class="container">
     <h3 class="p-3 text-center">Shipments</h3>
@@ -36,50 +76,7 @@
   
 </template>
 
-<script>
-  import axios from 'axios';
-
-  export default {
-    data() {
-      return {
-        columns: ['Shipment ID', 'Order ID', 'Ship date', 'Origin', 'Destination', 'Customer', 'Type ', 'Carrier', 'Status'],
-        shipments: [],
-      };
-    },
-    watch: {},
-    methods: {
-        async getShipments() {
-            try {
-                const response = await axios.get(`api/shipments/`);
-                this.shipments = await response.data;
-            } catch (error) {
-                console.log(error);
-            }
-        },
-        async erase(id){
-            console.log("Delete",id);
-            try {
-                const response = await axios.delete(`api/shipments/${id}`);
-                this.getShipments()
-            } catch (error) {
-                console.log(error);
-            }
-        },
-        formatDate(date) {
-        const options = { year: 'numeric', month: 'long', day: 'numeric' }
-        return new Date(date).toLocaleDateString('en', options)
-    },
-    },
-    created() {
-        this.getShipments();
-    },
-};
-</script>
-
 <style>
-    #app {
-    }
-
     .my-btn{
         font-size: 0.1rem;
         padding: 0px;
