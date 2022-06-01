@@ -23,7 +23,7 @@
         methods: {
             async createShipment(shipment: any){
                 try {
-                    await http.post(`shipments/`, shipment);
+                    await http.post(`/api/shipments/`, shipment);
                 } catch (error) {
                     console.log(error);
                 } finally {
@@ -32,9 +32,6 @@
                 }
             }
         },
-        mounted(){
-            // console.log(process.env.VUE_APP_NOT_SECRET_CODE)
-        }
     }
 </script>
 
@@ -52,7 +49,6 @@
 
 <style>
     .input{
-        /* padding-top: 5rem; */
         width: 20%;
         margin: 5rem auto;
     }

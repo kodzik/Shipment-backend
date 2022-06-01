@@ -12,7 +12,7 @@
         methods: {
             async getShipments() {
                 try {
-                    const response = await http.get(`shipments/`);
+                    const response = await http.get(`/api/shipments/`);
                     this.shipments = await response.data;
                 } catch (error) {
                     console.log(error);
@@ -21,7 +21,7 @@
             async erase(id){
                 console.log("Delete",id);
                 try {
-                    const response = await http.delete(`shipments/${id}`);
+                    const response = await http.delete(`/api/shipments/${id}`);
                     this.getShipments()
                 } catch (error) {
                     console.log(error);

@@ -7,7 +7,7 @@
             return{
                 shipment_id: '',
                 shipment: {
-                    order_id: 'elo',
+                    order_id: '',
                     origin: '',
                     destination: '',
                     customer: '',
@@ -23,7 +23,7 @@
         methods: {
             async getShipment(id: string) {
                 try {             
-                    const response = await http.get(`shipments/${id}`);
+                    const response = await http.get(`/api/shipments/${id}`);
                     this.shipment = await response.data[0];
                 } catch (error) {
                     console.log(error);
@@ -31,7 +31,7 @@
             },
             async updateShipment(id: string, shipment: any){
                 try {
-                    await http.put(`shipments/${id}`, shipment);
+                    await http.put(`/api/shipments/${id}`, shipment);
                 } catch (error) {
                     console.log(error);
                 } finally {
