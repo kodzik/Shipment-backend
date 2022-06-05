@@ -4,13 +4,27 @@ const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
   transpileDependencies: true,
 
-  publicPath: '', // Should be STATIC_URL + path/to/build      src/vue/dist/
-  outputDir: path.resolve(__dirname, '../static/'), // Output to a directory in STATICFILES_DIRS      src/vue/dist/
-  filenameHashing: false, // Django will hash file names, not webpack
-  runtimeCompiler: true, // See: https://vuejs.org/v2/guide/installation.html#Runtime-Compiler-vs-Runtime-only
+  // Should be STATIC_URL + path/to/build      src/vue/dist/
+  publicPath: '/static/',
+
+  // Output to a directory in STATICFILES_DIRS      src/vue/dist/
+  outputDir: path.resolve(__dirname, '../static/'),
+
+  // Django will hash file names, not webpack
+  filenameHashing: false,
+
+  // See: https://vuejs.org/v2/guide/installation.html#Runtime-Compiler-vs-Runtime-only
+  runtimeCompiler: true,
+
   devServer: {
     devMiddleware: {
-      writeToDisk: true, 
+      // writeToDisk: true, //TURN ON AFTER DEV!!!!!!!!
     }
   },
+
+  pluginOptions: {
+    vuetify: {
+			// https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vuetify-loader
+		}
+  }
 })
