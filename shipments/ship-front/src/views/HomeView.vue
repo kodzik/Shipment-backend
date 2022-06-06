@@ -8,7 +8,6 @@
             />
             <p v-else>Currently there are no shipments.</p>
         </v-card>
-        <!-- ERROR: {{error}} -->
     </div> 
 </template>
 

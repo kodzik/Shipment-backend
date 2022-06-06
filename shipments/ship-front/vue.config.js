@@ -5,7 +5,6 @@ module.exports = defineConfig({
   transpileDependencies: true,
 
   // Should be STATIC_URL + path/to/build      src/vue/dist/
-  // publicPath: '/static/',
   publicPath: '/static/',
 
   // Output to a directory in STATICFILES_DIRS      src/vue/dist/
@@ -19,7 +18,7 @@ module.exports = defineConfig({
 
   devServer: {
     devMiddleware: {
-      writeToDisk: true, //TURN ON AFTER DEV!!!!!!!!
+      writeToDisk: true,
     }
   },
 

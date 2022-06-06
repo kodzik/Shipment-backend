@@ -38,10 +38,6 @@ export default class ShipmentsAPIService{
     async deleteShipment(id:number) {
         return this.axiosCall<Shipment>( {method: 'delete', url: `/${id}`})
     }
-
-    test(id: string): Promise<Shipment>{
-        return this.axiosInstance.get(`/${id}`)
-    }
 }
 
 export const shipmentsAPI = new ShipmentsAPIService();
