@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <v-table>
         <thead>
             <tr>
@@ -22,8 +21,8 @@
                 <td>{{ship.carrier}}</td>
                 <td>{{ship.status}}</td>
                 <td>
-                    <button class="btn btn-success my-btn" style="margin: 0.5rem;" @click="handleOnEdit(ship.shipment_id)"><i class="material-icons">edit</i></button>
-                    <button class="btn btn-danger my-btn" style="margin: 0.5rem;" @click="handleOnDelete(ship.shipment_id)"><i class="material-icons">delete</i></button>
+                    <v-btn icon="mdi-pencil" variant="outlined" color="success" size="x-small" @click="handleOnEdit(ship.shipment_id)"></v-btn>
+                    <v-btn icon="mdi-delete" variant="outlined" color="error" size="x-small" @click="handleOnDelete(ship.shipment_id)" style="margin-left: 1rem"></v-btn>
                 </td>
             </tr>
         </tbody>
@@ -44,7 +43,7 @@
             }
         },
         setup(){
-            const columns = ['Shipment ID', 'Order ID', 'Ship date', 'Origin', 'Destination', 'Customer', 'Type ', 'Carrier', 'Status']            
+            const columns = ['Shipment ID', 'Order ID', 'Ship date', 'Origin', 'Destination', 'Customer', 'Type ', 'Carrier', 'Status', '']            
             return { columns }
         },
         methods: {
@@ -59,14 +58,10 @@
                 const [error, shipment] = await shipmentsAPI.deleteShipment(id)
                 if(error) await console.error(error);
                 else {
+                    await this.$emit('delete')
                     await console.log(`Shipment id: ${id} has been deleted.`);
-                    await this.$router.push({ name: "home" });  
                 }
             },
         },
     })
 </script>
-
-<style>
-
-</style>

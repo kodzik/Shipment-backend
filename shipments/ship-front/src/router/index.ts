@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import NotFoundPage from "../components/NotFoundPage.vue";
 // import UpdateShip from '../views/UpdateShip.vue'
 // import CreateShip from '../views/CreateShip.vue'
 
@@ -22,6 +23,12 @@ const routes: Array<RouteRecordRaw> = [
     // component: CreateShip
     component: () => import('../views/CreateShip.vue') 
   },
+  { 
+    path: '/:pathMatch(.*)*', 
+    name: "Not Found",
+    component: NotFoundPage 
+  }
+
   // { 
   //   path: '/details/:id', 
   //   name: 'details',

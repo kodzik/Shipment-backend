@@ -1,13 +1,19 @@
 <template>
     <div>
-        <ShipmentList v-if="shipments" :shipments="shipments"/>
-        ERROR: {{error}}
-        <button type="button" class="btn btn-primary" @click="$router.push('add')">New</button>
+        <v-card class="card">
+            <ShipmentList 
+            v-if="shipments" 
+            :shipments="shipments"
+            @delete="getShipments()"
+            />
+            <p v-else>Currently there are no shipments.</p>
+        </v-card>
+        <!-- ERROR: {{error}} -->
     </div> 
 </template>
 
 <script lang='ts'>
-    import { defineComponent, PropType, ref } from "@vue/runtime-core";
+    import { defineComponent, ref } from "@vue/runtime-core";
 
     import ShipmentList from "../components/ShipmentList.vue";
     import { shipmentsAPI } from "../API/shipments.api"
@@ -19,35 +25,20 @@
             const shipments = ref<Shipment[]>()
             const error = ref<string>()
 
-            shipmentsAPI.getAllShipments().then( (response: any) => {
-                [error.value, shipments.value] = response 
-            })
-            return { error, shipments }
+            const getShipments = () => {
+                shipmentsAPI.getAllShipments().then( (response: any) =>{
+                    [error.value, shipments.value] = response
+                })
+            }
+            getShipments()
+            return { error, shipments, getShipments }
         },
-        // methods:{
-        //     async getShipments(){
-        //         [this.error.values, this.shipments.value] = await shipmentsAPI.getAllShipments()
-        //         // if(error) console.error(error);
-        //         // else this.shipments = await shipments;
-        //     }
-        // },
-
-        // data(){
-        //     return{
-        //         shipments: Array as PropType<Shipment[]>,
-        //         // shipments: null,
-        //         error: null
-        //     }
-        // },
-        // async created(){
-        //     const [error, shipments] = await shipmentsAPI.getAllShipments()
-        //     if(error) console.error(error);
-        //     else this.shipments = await shipments;
-        //     console.log("Home", this.shipments);
-        // }     
     })
 </script>
 
-<style>
-
+<style scoped>
+    .card{
+        width: 90%;
+        margin: auto;
+    }
 </style>

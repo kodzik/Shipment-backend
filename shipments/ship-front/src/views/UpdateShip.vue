@@ -1,15 +1,18 @@
 <template>
-    <div class="input">
-        <h2> Update shipment </h2>
-
+    <div class="main">
+        <v-card class="card">
             <ModifyShip 
                 v-if="shipment" 
                 :shipment="shipment" 
                 @shipment="(mod_shipment) => { this.shipment = mod_shipment }">
             </ModifyShip>
 
-        <button class="btn btn-primary" @click="handleUpdate(this.shipment_id, this.shipment)">Save</button> 
-        <button class="btn btn-primary" @click="$router.push('/')" style="margin-left: 1rem">Cancel</button> 
+            <div class="btns">
+                <v-btn rounded="pill" color="primary" @click="handleUpdate(this.shipment_id, this.shipment)">Save</v-btn>
+                <v-btn rounded="pill" color="primary" @click="$router.push('/')" style="margin-left: 1rem">Cancel</v-btn>
+            </div>
+
+        </v-card>
     </div>
 </template>
 
@@ -36,20 +39,30 @@
             return { shipment, shipment_id, error }
         },
         methods:{
-            async handleUpdate(id: string, shipment: Shipment){
-               const [error, updatedShipment] = await shipmentsAPI.updateShipment(id, shipment)
-               if(error) console.error(error);
-               else console.log("Shipment updated", updatedShipment);
+            handleUpdate(id: string, shipment: Shipment){
+            shipmentsAPI.updateShipment(id, shipment).then( (response) => {
+                    const [error, shipment] = response
+                    if(error) alert("Invalid data")
+                    else{
+                        console.log(`Shipment updated: ${shipment}`);
+                        this.$router.push('/');  
+                    }
+               })
             }
         },
     })
 </script>
 
-<style>
-    .input{
-        /* padding-top: 5rem; */
-        width: 20%;
-        margin: 5rem auto;
+<style scoped>
+    .main{
+        margin-top: 4rem
     }
+    .card{
+        width: 50%;
+        margin: auto;
+        background-color: rgb(236, 236, 236);
+    }
+    .btns{
+        padding: 1rem;
+    }    
 </style>
-

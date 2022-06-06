@@ -1,8 +1,20 @@
 <template>
   <v-app>
-    <v-main>
-      <router-view/>
-    </v-main>
+    <v-card color="grey lighten-4" flat tile>
+      <v-toolbar dense>
+        <v-app-bar-nav-icon @click="$router.push('/')"></v-app-bar-nav-icon>
+
+        <v-toolbar-title @click="$router.push('/')">Shipments</v-toolbar-title>
+
+        <v-spacer></v-spacer>
+
+        <v-btn color="primary" @click="$router.push('/add')">New Shipment</v-btn>
+
+      </v-toolbar>
+    </v-card>
+
+    <router-view/>
+
   </v-app>
 </template>
 

@@ -31,8 +31,7 @@ export default class ShipmentsAPIService{
         return this.axiosCall<Shipment>( {method: 'post', url: `/`, data: shipment})
     }
 
-    // async updateShipment(id:string, shipment: Partial<Shipment>) {
-    async updateShipment(id:any, shipment: any) {
+    async updateShipment(id:string, shipment: Partial<Shipment>) {
         return this.axiosCall<Shipment>( {method: 'put', url: `/${id}`, data: shipment})
     }
 

@@ -1,115 +1,115 @@
 <template>
     <div>
-        <v-card>
-            <v-form v-if="mod_shipment">
-                <!-- <v-container> -->
-                    <v-text-field
-                        v-model="mod_shipment.shipment_id"
-                        label="Shipment ID (readonly)"
-                        readonly
-                    ></v-text-field>
+        <v-form ref="form" v-if="mod_shipment">
+            <v-container>
+                <v-row v-if="$route.name!='add'">
+                    <v-col>
+                        <v-text-field
+                            v-model="mod_shipment.shipment_id"
+                            label="Shipment ID (readonly)"
+                            readonly
+                        ></v-text-field>
+                    </v-col>
+                    <v-col>
+                        <v-text-field
+                            v-model="mod_shipment.ship_date"
+                            label="Shipment Date (readonly)"
+                            readonly
+                        ></v-text-field>
+                    </v-col>
+                </v-row>
 
-                    <v-text-field
-                        v-model="mod_shipment.ship_date"
-                        label="Shipment Date (readonly)"
-                        readonly
-                    ></v-text-field>
+                <v-row>
+                    <v-col>
+                        <v-text-field
+                            v-model="mod_shipment.order_id"
+                            label="Order ID"
+                            required
+                        ></v-text-field>
+                    </v-col>
+                    <v-col>
+                        <v-text-field
+                            v-model="mod_shipment.origin"
+                            label="Origin"
+                            required
+                        ></v-text-field>
+                    </v-col>
+                </v-row>
 
-                    <v-text-field
-                        v-model="mod_shipment.order_id"
-                        label="Order ID"
-                        required
-                    ></v-text-field>
+                <v-row>
+                    <v-col>
+                        <v-text-field
+                            v-model="mod_shipment.destination"
+                            label="Destination"
+                            required
+                        ></v-text-field>
+                    </v-col>
+                    <v-col>
+                        <v-text-field
+                            v-model="mod_shipment.customer"
+                            label="Customer"
+                            required
+                        ></v-text-field>
+                    </v-col>
+                </v-row>
 
-                    <v-text-field
-                        v-model="mod_shipment.origin"
-                        label="Origin"
-                        required
-                    ></v-text-field>
+                <v-row>
+                    <v-col>
+                        <v-select
+                            v-model="mod_shipment.type"
+                            :items="shipType"
+                            label="Type"
+                            required
+                        ></v-select>                           
+                    </v-col>
+                    <v-col>
+                        <v-select
+                            v-model="mod_shipment.carrier"
+                            :items="carrier"
+                            label="Carrier"
+                            required
+                        ></v-select>   
+                    </v-col>
+                </v-row>      
 
-                    <v-text-field
-                        v-model="mod_shipment.destination"
-                        label="Destination"
-                        required
-                    ></v-text-field>
+                <v-select
+                    v-model="mod_shipment.status"
+                    :items="shipStatus"
+                    label="Status"
+                    required
+                ></v-select>               
 
-                    <v-text-field
-                        v-model="mod_shipment.customer"
-                        label="Customer"
-                        required
-                    ></v-text-field>
-
-                    <v-text-field
-                        v-model="mod_shipment.type"
-                        label="Type"
-                        required
-                    ></v-text-field>
-
-                    <v-text-field
-                        v-model="mod_shipment.carrier"
-                        label="Carrier"
-                        required
-                    ></v-text-field>
-
-                    <v-text-field
-                        v-model="mod_shipment.status"
-                        label="Status"
-                        required
-                    ></v-text-field>
-                <!-- </v-container> -->
-            </v-form>
-        </v-card>
-
-
-        <!-- <table v-if="mod_shipment">
-            <tbody>
-                <tr>
-                    <td>Order id:</td>
-                    <td>
-                        <input type="number" v-model="mod_shipment.order_id">
-                    </td>
-                </tr>
-                <tr>
-                    <td>Origin:</td>
-                    <td>
-                        <input v-model="mod_shipment.origin">
-                    </td>                
-                </tr>
-                <tr>
-                    <td>Destination:</td>
-                    <td>
-                        <input v-model="mod_shipment.destination">
-                    </td>                
-                </tr>
-                <tr>
-                    <td>Customer:</td>
-                    <td>
-                        <input v-model="mod_shipment.customer">
-                    </td>                   
-                </tr>
-                <tr>
-                    <td>Type:</td>
-                    <td><input v-model="mod_shipment.type"></td>
-                </tr>
-                <tr>
-                    <td>Carrier:</td>
-                    <td><input v-model="mod_shipment.carrier"></td>
-                </tr>
-                <tr>
-                    <td>Status:</td>
-                    <td><input v-model="mod_shipment.status"></td>
-                </tr>                            
-            </tbody>
-        </table> -->
-
+            </v-container>
+            <!-- <v-btn @click="validate()"></v-btn> -->
+        </v-form>
     </div>
 </template>
 
 <script lang='ts'>
-import { defineComponent, PropType, ref } from "@vue/runtime-core"
-import Shipment from "../types/shipment"
+    import { defineComponent, PropType, ref } from "@vue/runtime-core"
+    import Shipment from "../types/shipment"
 
     export default defineComponent({
+        data(){
+            return{
+                shipStatus: [
+                    'Ordered',
+                    'Packed',
+                    'In transit',
+                    'Delivered'
+                ],
+                shipType: [
+                    'Standard',
+                    'Priority ',
+                    'First'
+                ],
+                carrier: [
+                    'DPD',
+                    'FedEx',
+                    'UPS',
+                ]
+            }
+        },
         props: {
             shipment: {
                 required: true,
@@ -121,8 +121,12 @@ import Shipment from "../types/shipment"
             return { mod_shipment }
         },
         mounted(){
-            // console.log(`Modify shipment, shipment: ${this.shipment }`);
             this.mod_shipment = this.shipment
+        },
+        methods:{
+            validate () {
+                // this.$refs.form.validate()
+            },
         },
         emits:['mod_shipment'],
         watch:{
@@ -132,3 +136,11 @@ import Shipment from "../types/shipment"
         }
     })
 </script>
+
+<style scoped>
+    .card{
+        width: 60%;
+        margin: auto;
+        background-color: rgb(236, 236, 236);
+    }
+</style>

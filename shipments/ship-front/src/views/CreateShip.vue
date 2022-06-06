@@ -1,15 +1,18 @@
 <template>
-    <div class="input">
-        <h2> Add new shipment: </h2>
-
+    <div class="main">
+        <v-card class="card">
             <ModifyShip 
                 v-if="shipment" 
                 :shipment="shipment" 
                 @shipment="(mod_shipment) => { this.shipment = mod_shipment }">
             </ModifyShip>
 
-        <button class="btn btn-primary" @click="handleAdd(this.shipment)">Save</button> 
-        <button class="btn btn-primary" @click="$router.push('/')" style="margin-left: 1rem">Cancel</button> 
+            <div class="btns">
+                <v-btn rounded="pill" color="primary" @click="handleAdd(this.shipment)">Save</v-btn>
+                <v-btn rounded="pill" color="primary" @click="$router.push('/')" style="margin-left: 1rem">Cancel</v-btn>
+            </div>
+
+        </v-card>
     </div>
 </template>
 
@@ -47,25 +50,22 @@
                         this.$router.push({ name: "home" });  
                     }
                 })
-
-                // await console.log(`Error: ${error}, createdShipment: ${createdShipment}`);
-                // if(error){
-                //     await alert("Invalid data")
-                // } 
-                // else{
-                //     await console.log(`Shipment added: ${createdShipment}`);
-                //     await this.$router.push({ name: "home" });  
-                // }
             }
         }
     })
 </script>
 
 <style>
-    .input{
-        /* padding-top: 5rem; */
-        width: 20%;
-        margin: 5rem auto;
+    .main{
+        margin-top: 4rem
+    }
+    .btns{
+        padding: 1rem;
+    }
+    .card{
+        width: 50%;
+        margin: auto;
+        background-color: rgb(236, 236, 236);
     }
 </style>
 
