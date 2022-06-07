@@ -27,5 +27,11 @@ ship-front/yarn-error.log*
 ship-front/pnpm-debug.log*
 ship-front/lerna-debug.log*
 
-*/ship-front/node_modules
+ship-front/node_modules
+static-root
+ship-front/.DS_Store
+ship-front/dist
+ship-front/dist-ssr
+ship-front/coverage
+ship-front/*.local
 

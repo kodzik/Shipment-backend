@@ -11,7 +11,10 @@ class ShipmentViews(APIView):
         # checking for the parameters from the URL
         if pk:
             try:
-                items = Shipment.objects.filter(pk=pk)
+                shipment = Shipment.objects.filter(pk=pk)
+                serializer = ShipmentSerializer(shipment, many=True)
+                data = serializer.data
+                return Response(data[0])
             except:
                 return Response(status=status.HTTP_404_NOT_FOUND)
         else:
