@@ -40,7 +40,7 @@ class TestViews(TestCase):
     def test_create_POST(self):
         response = self.client.post(self.main_url, self.test_data)
         created_shipment = Shipment.objects.get(shipment_id=2)
-        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response.status_code, 201)
         self.assertEquals(created_shipment.origin, "origin_test_case")
 
     def test_create_POST_no_data(self):
@@ -58,4 +58,4 @@ class TestViews(TestCase):
 
     def test_delete_DELETE(self):
         response = self.client.delete(self.params_url)
-        self.assertEquals(response.status_code, 202)
+        self.assertEquals(response.status_code, 204)

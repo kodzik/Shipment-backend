@@ -31,9 +31,9 @@ class ShipmentViews(APIView):
         
         if serializer.is_valid():
             serializer.save()
-            return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
-            return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk):
         item = Shipment.objects.get(pk=pk)
