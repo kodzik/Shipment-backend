@@ -48,4 +48,4 @@ class ShipmentViews(APIView):
     def delete(self, request, pk):
         item = get_object_or_404(Shipment, pk=pk)
         item.delete()
-        return Response(status=status.HTTP_202_ACCEPTED)
+        return Response(status=status.HTTP_204_NO_CONTENT)
