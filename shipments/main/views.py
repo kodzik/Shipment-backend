@@ -8,19 +8,17 @@ from main.serializers import ShipmentSerializer
 
 class ShipmentViews(APIView):
     def get(self, request, pk=None):
-        # checking for the parameters from the URL
         if pk:
-            try:
-                shipment = Shipment.objects.filter(pk=pk)
+            shipment = Shipment.objects.filter(pk=pk)
+            if shipment: 
                 serializer = ShipmentSerializer(shipment, many=True)
                 data = serializer.data
                 return Response(data[0])
-            except:
+            else:
                 return Response(status=status.HTTP_404_NOT_FOUND)
         else:
             items = Shipment.objects.all()
 
-        # if there is something in items else raise error
         if items:
             serializer = ShipmentSerializer(items, many=True)
             data = serializer.data
@@ -29,7 +27,7 @@ class ShipmentViews(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
     def post(self, request):
-        serializer = ShipmentSerializer(data=request.data) #user=request.user
+        serializer = ShipmentSerializer(data=request.data)
         
         if serializer.is_valid():
             serializer.save()
