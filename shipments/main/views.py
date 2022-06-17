@@ -6,6 +6,7 @@ from rest_framework import status
 from main.models import Shipment
 from main.serializers import ShipmentSerializer
 
+
 class ShipmentViews(APIView):
     def get(self, request, pk=None):
         if pk:
